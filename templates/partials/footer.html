@@ -1,0 +1,39 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="{{ROOT}}">{{BRAND_FIRST}}<em>{{BRAND_SECOND}}</em></a>
+        <p>{{FOOTER_BLURB}}</p>
+        <p class="tagline">{{TAGLINE}}</p>
+      </div>
+      <div class="footer-col">
+        <h3>{{FOOTER_COL_1_TITLE}}</h3>
+        <ul>
+          <li><a href="{{ROOT}}section-a/">Link</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="{{ROOT}}contact/">Contact</a></li>
+          <li><a href="{{ROOT}}legal/">Legal</a></li>
+          <li><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></li>
+          <!-- CONFIRM: phone, office address -->
+        </ul>
+      </div>
+      <div class="footer-col footer-news">
+        <h3>Be first to know</h3>
+        <p>{{NEWSLETTER_BLURB}}</p>
+        <form class="news-form" novalidate="false">
+          <label class="visually-hidden" for="news-email">Email</label>
+          <input id="news-email" type="email" name="email" placeholder="Email address" required />
+          <button class="btn btn-solid btn-sm" type="submit">Subscribe</button>
+        </form>
+        <div class="form-success" style="margin-top:0.8rem;padding:0.9rem 1rem"><p>You're on the list.</p></div>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>© {{YEAR}} {{COMPANY}}. All rights reserved. {{LEGAL_LINE}}</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" class="inner">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{SEO_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <link rel="canonical" href="{{CANONICAL_URL}}" />
+  <meta property="og:title" content="{{SEO_TITLE}}" />
+  <meta property="og:description" content="{{META_DESCRIPTION}}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="{{GOOGLE_FONTS_URL}}" rel="stylesheet" />
+  <link rel="icon" href="{{FAVICON_DATA_URI}}" />
+  <link rel="stylesheet" href="{{ROOT}}css/style.css?v={{V}}" />
+  <script type="application/ld+json">{{BREADCRUMB_JSONLD}}</script>
+</head>
+<body class="page">
+
+  {{HEADER}}
+
+  <main>
+
+    <!-- HERO, pick ONE of the three variants below and delete the others. -->
+
+    <!-- (a) Plain hero, optional media on the right (add class has-media + .hero-media) -->
+    <section class="page-hero">
+      <div class="wrap">
+        <div>
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{{ROOT}}">Home</a><span>/</span>{{PAGE_NAME}}</nav>
+          <span class="eyebrow">{{EYEBROW}}</span>
+          <h1>{{H1}}</h1>
+          <p class="lede">{{LEDE}}</p>
+          <div class="hero-ctas"><a class="btn btn-solid" href="#register">{{PRIMARY_CTA}}</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- (b) Ambient loop hero: muted video over its poster with the brand gradient on top.
+         Loops come from tools/kie.py video with the SAME image as start and end frame, encoded by tools/loop.sh.
+    <section class="page-hero has-loop">
+      <div class="hero-loop" aria-hidden="true">
+        <img src="{{ROOT}}assets/loops/{{LOOP}}.webp" alt="" loading="eager" />
+        <video autoplay muted loop playsinline preload="metadata" poster="{{ROOT}}assets/loops/{{LOOP}}.webp"><source src="{{ROOT}}assets/loops/{{LOOP}}.mp4" type="video/mp4" /></video>
+      </div>
+      <div class="wrap"> …same inner markup as (a)… </div>
+    </section>
+    -->
+
+    <!-- (c) Sticky scrub hero: the page pins for ~3 screens while the card scrubs an image sequence (js/scrub.js).
+    <div class="scrub-runway" id="seasons">
+    <section class="page-hero has-media sticky-hero">
+      <div class="wrap">
+        <div> …same inner markup as (a)… </div>
+        <div class="hero-media seasons-card reveal">
+          <canvas data-scrub data-frames="{{ROOT}}frames/seasons/se_" data-count="183" data-poster="{{ROOT}}assets/img/poster.webp" data-runway="#seasons"
+                  data-timeline="0:0,0.08:0,0.34:60,0.40:61,0.66:121,0.72:122,0.98:182,1:182"
+                  role="img" aria-label="{{SCRUB_ALT}}"></canvas>
+          <ol class="season-tabs" aria-hidden="true">
+            <li data-at="0">Summer</li><li data-at="0.30">Fall</li><li data-at="0.62">Winter</li><li data-at="0.94">Spring</li>
+          </ol>
+          <p class="season-caption">{{SCRUB_CAPTION}}</p>
+        </div>
+      </div>
+    </section>
+    </div>
+    -->
+
+    <!-- Sections. Available blocks (see css/style.css): .section (+ .paper alternates the ground), .wrap / .wrap-narrow,
+         .section-head, .split-head, .feature-grid (+ .cols-2), .why-grid/.why-card, .card-grid (+ .cols-3/.cols-4) of .community-card,
+         .gallery (first figure spans 2x2), .terms/.terms.compact (dl), .timeline, .faq (details/summary), .band-cta, .form-layout + form.form -->
+
+    <section class="section" id="overview">
+      <div class="wrap statement">
+        <h2 class="reveal">{{SECTION_HEADING}}</h2>
+        <div class="reveal"><p>{{SECTION_BODY}}</p></div>
+      </div>
+    </section>
+
+    <!-- Lead form: posts through js/site.js to the endpoint in js/config.js -->
+    <section class="section paper" id="register">
+      <div class="wrap form-layout">
+        <div class="reveal">
+          <span class="eyebrow">{{FORM_EYEBROW}}</span>
+          <h2 class="h2" style="margin-top:0.8rem">{{FORM_HEADING}}</h2>
+          <p class="ink-soft" style="margin-top:1rem;font-size:1.08rem">{{FORM_BLURB}}</p>
+        </div>
+        <div>
+          <form class="form reveal" method="post" data-endpoint="" data-form="{{FORM_NAME}}">
+            <div class="row">
+              <div class="field"><label for="first_name">First name*</label><input id="first_name" name="first_name" required /></div>
+              <div class="field"><label for="last_name">Last name*</label><input id="last_name" name="last_name" required /></div>
+            </div>
+            <div class="row">
+              <div class="field"><label for="email">Email*</label><input id="email" type="email" name="email" required /></div>
+              <div class="field"><label for="phone">Phone</label><input id="phone" type="tel" name="phone" /></div>
+            </div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="{{FORM_PLACEHOLDER}}"></textarea></div>
+            <label class="check"><input type="checkbox" name="consent" value="yes" required /> <span>{{CONSENT_TEXT}}</span></label>
+            <button class="btn btn-solid btn-lg" type="submit">{{FORM_SUBMIT}}</button>
+            <p class="micro recaptcha-note">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
+          </form>
+          <div class="form-success"><h3>{{FORM_SUCCESS_HEADING}}</h3><p>{{FORM_SUCCESS_BODY}}</p></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  {{FOOTER}}
+
+  <script src="{{ROOT}}js/config.js?v={{V}}"></script>
+  <script src="{{ROOT}}js/site.js?v={{V}}"></script>
+  <!-- only on pages with a sticky scrub hero: <script src="{{ROOT}}js/scrub.js?v={{V}}"></script> -->
+</body>
+</html>

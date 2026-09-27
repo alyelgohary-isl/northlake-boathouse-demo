@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{SEO_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <link rel="canonical" href="{{CANONICAL_URL}}" />
+  <meta property="og:title" content="{{SEO_TITLE}}" />
+  <meta property="og:description" content="{{META_DESCRIPTION}}" />
+  <meta property="og:image" content="{{OG_IMAGE_URL}}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="{{GOOGLE_FONTS_URL}}" rel="stylesheet" />
+  <link rel="icon" href="{{FAVICON_DATA_URI}}" />
+  <link rel="stylesheet" href="./css/style.css?v={{V}}" />
+  <script type="application/ld+json">{{ORGANIZATION_JSONLD}}</script>
+</head>
+<body class="film">
+
+  <!-- Loader: shows until the opening frames are in (FILM.firstChunk) -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <span class="loader-brand">{{BRAND_FIRST}}</span>
+      <div class="loader-track"><div id="loader-bar"></div></div>
+      <span id="loader-percent">0</span>
+    </div>
+  </div>
+
+  {{HEADER}}
+
+  <!-- The film: a square card anchored right on landscape, under the copy on portrait -->
+  <div class="canvas-wrap" id="canvas-wrap"><canvas id="canvas"></canvas></div>
+
+  <!-- Dark overlay for a stats moment (optional; FILM.overlay) -->
+  <div id="dark-overlay" aria-hidden="true"></div>
+
+  <!-- Oversized sliding text (optional; FILM.marquee) -->
+  <div class="marquee-wrap" id="marquee" aria-hidden="true">
+    <span class="marquee-text">{{MARQUEE_TEXT}}&nbsp;&nbsp;{{MARQUEE_TEXT}}&nbsp;&nbsp;{{MARQUEE_TEXT}}</span>
+  </div>
+
+  <!-- Fixed text band: one section per film beat, each tied to a timeline segment -->
+  <div class="band" id="band">
+
+    <section class="band-section hero-section is-active" id="top" data-seg="hero:0,hero:1" data-animation="hero">
+      <div class="hero-inner">
+        <span class="eyebrow">{{EYEBROW}}</span>
+        <h1 class="hero-heading">
+          <!-- wrap each word: the intro animates them in -->
+          <span class="line"><span class="word">Word</span> <span class="word">word</span></span>
+          <span class="line"><span class="word">word</span> <span class="word">word.</span></span>
+        </h1>
+        <p class="hero-tagline">{{HERO_TAGLINE}}</p>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="./section-a/">{{PRIMARY_CTA}}</a>
+          <a class="btn btn-ghost" href="./section-b/">{{SECONDARY_CTA}}</a>
+        </div>
+        <div class="badge-strip"><span>{{BADGE_1}}</span><span>{{BADGE_2}}</span><span>{{BADGE_3}}</span></div>
+      </div>
+    </section>
+
+    <!-- Numbered beat: one message per clip. Animations: slide-left, fade-up, clip-reveal, rotate-in, stagger-up -->
+    <section class="band-section" data-seg="clip1:0.15,clip1:0.95" data-animation="slide-left">
+      <div class="beat-copy">
+        <span class="beat-index">1</span>
+        <h2 class="beat-heading">{{BEAT_1_HEADING}}</h2>
+        <p class="beat-body">{{BEAT_1_BODY}}</p>
+      </div>
+    </section>
+
+    <!-- Interlude caption for a cutaway: eyebrow + one line, no number -->
+    <!--
+    <section class="band-section interlude" data-seg="cufwd:0.7,curev:0.4" data-animation="fade-up">
+      <div class="beat-copy">
+        <span class="beat-index beat-eyebrow">Inside</span>
+        <h2 class="beat-heading">{{INTERLUDE_LINE}}</h2>
+      </div>
+    </section>
+    -->
+
+    <section class="band-section" data-seg="clip2:0.1,clip2:0.95" data-animation="fade-up">
+      <div class="beat-copy">
+        <span class="beat-index">2</span>
+        <h2 class="beat-heading">{{BEAT_2_HEADING}}</h2>
+        <p class="beat-body">{{BEAT_2_BODY}}</p>
+      </div>
+    </section>
+
+    <!-- Stats moment over the darkened final shot (needs FILM.overlay) -->
+    <section class="band-section stats-section" data-seg="clip3:0.12,end:1" data-animation="stagger-up">
+      <div class="stats-hero">
+        <span class="stats-figure"><span class="stat-number" data-value="{{BIG_NUMBER}}" data-decimals="0">0</span>{{BIG_SUFFIX}}</span>
+        <span class="stats-caption">{{BIG_CAPTION}}</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat"><span class="stat-number" data-value="{{STAT_1}}" data-decimals="0">0</span><span class="stat-suffix"></span><span class="stat-label">{{STAT_1_LABEL}}</span></div>
+        <div class="stat"><span class="stat-number" data-value="{{STAT_2}}" data-decimals="0">0</span><span class="stat-suffix">+</span><span class="stat-label">{{STAT_2_LABEL}}</span></div>
+        <div class="stat"><span class="stat-number" data-value="{{STAT_3}}" data-decimals="0">0</span><span class="stat-suffix">+</span><span class="stat-label">{{STAT_3_LABEL}}</span></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Scroll runway: ~100vh per timeline unit (set in css: #scroll-container) -->
+  <div id="scroll-container"></div>
+
+  <!-- Released page flow: keep it short. Statement → featured → grid → CTA. Everything else lives on inner pages. -->
+  <main class="page-flow">
+    <span class="flow-anchor" id="flow"></span>
+
+    <section class="section" id="about">
+      <div class="wrap statement">
+        <h2 class="reveal">{{STATEMENT_HEADING}}</h2>
+        <div class="reveal">
+          <p>{{STATEMENT_BODY}}</p>
+          <p class="accent">{{STATEMENT_ACCENT}}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section no-top" id="featured">
+      <div class="wrap">
+        <article class="featured reveal">
+          <div class="featured-media"><img src="./assets/img/{{FEATURED_IMAGE}}" alt="{{FEATURED_ALT}}" loading="lazy" /></div>
+          <div class="featured-body">
+            <span class="status-label"><span class="dot"></span>{{FEATURED_LABEL}}</span>
+            <h2>{{FEATURED_HEADING}}</h2>
+            <p class="featured-lede">{{FEATURED_LEDE}}</p>
+            <dl class="spec-list">
+              <div><dt>{{SPEC_1}}</dt><dd>{{SPEC_1_VALUE}}</dd></div>
+              <div><dt>{{SPEC_2}}</dt><dd>{{SPEC_2_VALUE}}</dd></div>
+            </dl>
+            <div class="hero-ctas">
+              <a class="btn btn-solid" href="./section-a/item/#register">{{FEATURED_CTA}}</a>
+              <a class="btn btn-ghost" href="./section-a/item/">{{FEATURED_CTA_2}}</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="grid">
+      <div class="wrap">
+        <div class="split-head">
+          <div class="section-head reveal">
+            <span class="eyebrow">{{GRID_EYEBROW}}</span>
+            <h2>{{GRID_HEADING}}</h2>
+            <p>{{GRID_INTRO}}</p>
+          </div>
+          <a class="btn btn-ghost reveal" href="./section-a/">{{GRID_ALL_LABEL}}</a>
+        </div>
+        <div class="card-grid cols-4">
+          <!-- .community-card: media (img or .placeholder with .ph-mark + .ph-note) + body (h3, .card-desc, .card-meta, .link-arrow). Link pins to the bottom. -->
+          <a class="community-card reveal" href="./section-a/item/">
+            <div class="card-media"><img src="./assets/img/{{CARD_IMAGE}}" alt="" loading="lazy" /><span class="status-label"><span class="dot"></span>{{CARD_LABEL}}</span></div>
+            <div class="card-body">
+              <h3>{{CARD_TITLE}}</h3>
+              <p class="card-desc">{{CARD_DESC}}</p>
+              <p class="card-meta">{{CARD_META}}</p>
+              <span class="link-arrow">{{CARD_LINK}}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pine final-cta" id="register">
+      <div class="wrap reveal">
+        <h2>{{CTA_HEADING}}</h2>
+        <p>{{CTA_BODY}}</p>
+        <div class="hero-ctas">
+          <a class="btn btn-light btn-lg" href="./contact/">{{PRIMARY_CTA}}</a>
+          <a class="btn btn-ghost btn-lg" href="./section-b/">{{SECONDARY_CTA}}</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  {{FOOTER}}
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="./js/config.js?v={{V}}"></script>
+  <script src="./js/site.js?v={{V}}"></script>
+  <script src="./js/film.config.js?v={{V}}"></script>
+  <script src="./js/app.js?v={{V}}"></script>
+</body>
+</html>
