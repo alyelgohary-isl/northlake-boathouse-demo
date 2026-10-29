@@ -3,7 +3,9 @@
    slip:     cutaway into the boat slip (S2 → S3), played forward, held, then reversed on the timeline
    rise:     pull back and crane up to the aerial (S2 → S4)
    dusk:     locked aerial, afternoon → dusk, windows and lanterns come on (S4 → open)
-   Units are relative (~100vh each on desktop, ~70vh on mobile); css #scroll-container = 695vh / 490vh. */
+   Units are relative (~100vh each on desktop, ~70vh on mobile); css #scroll-container = 605vh / 427vh.
+   No hold under the hero: the approach starts on the first scroll and the hero copy fades over
+   the start of clip1 (its data-seg in index.html). */
 window.FILM = {
   sources: {
     approach: { dir: "frames/approach", prefix: "ap_", count: 61 },
@@ -12,8 +14,7 @@ window.FILM = {
     dusk:     { dir: "frames/dusk",     prefix: "du_", count: 61 },
   },
   timeline: [
-    { id: "hero",   units: 0.9,  src: "approach", f0: 0,  f1: 0  },   // hold on the first frame under the hero copy
-    { id: "clip1",  units: 1.0,  src: "approach", f0: 0,  f1: 60 },   // 1. seen first from the water
+    { id: "clip1",  units: 1.0,  src: "approach", f0: 0,  f1: 60 },   // hero, then 1. seen first from the water
     { id: "hold1",  units: 0.35, src: "approach", f0: 60, f1: 60 },   // 2. cedar that belongs on the shore
     { id: "cufwd",  units: 0.9,  src: "slip",     f0: 0,  f1: 60 },   // cutaway: into the slip
     { id: "cuhold", units: 0.5,  src: "slip",     f0: 60, f1: 60 },   //    hold inside
@@ -24,6 +25,8 @@ window.FILM = {
     { id: "clip4",  units: 1.0,  src: "dusk",     f0: 0,  f1: 60 },   // 4. dusk: stats over the darkened aerial
     { id: "end",    units: 0.4,  src: "dusk",     f0: 60, f1: 60 },
   ],
-  overlay: { enter: "clip4:0.22", leave: "end:0.8" },   // dark overlay behind the stats section
+  overlay: { enter: "clip4:0.16", leave: "end:1", max: 0.68 },   // dark overlay behind the stats section: the lake shows, the text reads
+  after: { src: "assets/img/lake-hills.webp", from: "clip4:0.08", to: "clip4:0.3" },   // the dusk aerial fades into the lake while still a card...
+  stretch: { from: "clip4:0.3", to: "clip4:0.6" },               // ...then the card grows to fill the screen (the 960px film never goes full-bleed)
   firstChunk: 40,
 };
